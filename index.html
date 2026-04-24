@@ -14,19 +14,19 @@
 </head>
 <body class="bg-slate-950 text-white min-h-screen">
 
-    <!-- Page content (optional - you can delete this if you only want the widget) -->
     <div class="flex items-center justify-center min-h-screen p-6">
-        <div class="text-center">
-            <h1 class="text-5xl font-bold mb-4">Get an Estimate</h1>
-            <p class="text-emerald-300 text-xl mb-10">Tell us about your Dallas construction project.</p>
-            <button onclick="openQuoteModal()" class="bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-2xl px-14 py-7 rounded-3xl flex items-center gap-4 mx-auto">
+        <div class="text-center max-w-lg">
+            <h1 class="text-5xl font-bold tracking-tight mb-4">Get an Estimate</h1>
+            <p class="text-emerald-300 text-xl mb-10">Tell us about your Dallas construction project — we’ll give you a fast, accurate quote.</p>
+            <button onclick="openQuoteModal()" 
+                    class="bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-2xl px-14 py-7 rounded-3xl flex items-center gap-4 mx-auto transition-all">
                 <i class="fa-solid fa-rocket"></i>
                 START YOUR ESTIMATE
             </button>
         </div>
     </div>
 
-    <!-- THE FULL WIDGET MODAL -->
+    <!-- MULTI-STEP WIDGET MODAL -->
     <div id="quoteModal" class="hidden fixed inset-0 bg-black/95 flex items-center justify-center z-[99999] p-4">
         <div class="bg-[#0f172a] rounded-3xl max-w-4xl w-full max-h-[95vh] overflow-hidden flex flex-col">
             <div class="px-8 pt-6 pb-4 border-b border-emerald-500/30 flex justify-between items-center">
@@ -190,7 +190,7 @@
         }
 
         window.onload = () => {
-            console.log('%cSTAXX Get an Estimate Widget Ready', 'color:#10b981; font-weight:bold');
+            console.log('%cSTAXX Get an Estimate Widget Loaded', 'color:#10b981; font-weight:bold');
         };
     </script>
 </body>
