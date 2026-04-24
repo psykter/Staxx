@@ -1,7 +1,48 @@
-<!-- Stella Full-Page Quote Widget - Option 2 -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap">
-<div id="stella-widget" class="stella-widget" data-company-id="6940176e62f1cb56f7042bf5" data-attribution-source-id="69837fa29c04da57f3010f5f">
-  <noscript><div class="noscript">Lily Pad quoting widget requires JavaScript. If you are unable to run JavaScript, please use the contact form on this website.</div></noscript>
-</div>
-<link rel="stylesheet" href="https://app.runstella.com/widget/v2/index.css">
-<script src="https://app.runstella.com/widget/v2/index.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Quote - Lily Pad</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://app.runstella.com/widget/v2/index.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+            height: 100%;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .widget-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        #stella-widget {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="widget-container">
+        <div id="stella-widget" class="stella-widget" 
+             data-company-id="6940176e62f1cb56f7042bf5" 
+             data-hero-version="1" 
+             data-attribution-source-id="69837fa29c04da57f3010f5f">
+            <noscript>
+                <div class="noscript">Lily Pad quoting widget requires JavaScript. If you are unable to run JavaScript please use the contact form on this website.</div>
+            </noscript>
+        </div>
+    </div>
+
+    <script src="https://app.runstella.com/widget/v2/index.js"></script>
+</body>
+</html>
