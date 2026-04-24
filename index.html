@@ -12,42 +12,57 @@
         h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
     </style>
 </head>
-<body class="bg-slate-950 text-white min-h-screen">
+<body class="bg-slate-950 text-white min-h-screen flex items-center justify-center p-6">
 
-    <div class="flex items-center justify-center min-h-screen p-6">
-        <div class="text-center max-w-lg">
-            <h1 class="text-5xl font-bold tracking-tight mb-4">Get an Estimate</h1>
-            <p class="text-emerald-300 text-xl mb-10">Tell us about your Dallas construction project — we’ll give you a fast, accurate quote.</p>
-            <button onclick="openQuoteModal()" 
-                    class="bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-2xl px-14 py-7 rounded-3xl flex items-center gap-4 mx-auto transition-all">
-                <i class="fa-solid fa-rocket"></i>
-                START YOUR ESTIMATE
-            </button>
-        </div>
+    <div class="text-center max-w-lg">
+        <h1 class="text-5xl font-bold tracking-tight mb-4">Get an Estimate</h1>
+        <p class="text-emerald-300 text-xl mb-10">Tell us about your Dallas construction project — we’ll give you a fast, accurate quote.</p>
+        <button onclick="openQuoteModal()" 
+                class="bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-2xl px-14 py-7 rounded-3xl flex items-center gap-4 mx-auto transition-all">
+            <i class="fa-solid fa-rocket"></i>
+            START YOUR ESTIMATE
+        </button>
     </div>
 
-    <!-- MULTI-STEP WIDGET MODAL -->
+    <!-- MULTI-STEP BUILD YOUR ORDER WIDGET (the exact modal you wanted) -->
     <div id="quoteModal" class="hidden fixed inset-0 bg-black/95 flex items-center justify-center z-[99999] p-4">
-        <div class="bg-[#0f172a] rounded-3xl max-w-4xl w-full max-h-[95vh] overflow-hidden flex flex-col">
-            <div class="px-8 pt-6 pb-4 border-b border-emerald-500/30 flex justify-between items-center">
-                <h3 class="text-3xl font-bold">Get Your Estimate</h3>
-                <button onclick="closeQuoteModal()" class="text-5xl leading-none text-emerald-400 hover:text-white">×</button>
+        <div class="bg-[#1a1a1a] rounded-3xl max-w-4xl w-full max-h-[95vh] overflow-hidden flex flex-col shadow-2xl">
+
+            <!-- HEADER + PROGRESS -->
+            <div class="px-8 pt-6 pb-4 border-b border-emerald-500/30">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-3xl font-bold">Build Your Order</h3>
+                    <button onclick="closeQuoteModal()" class="text-5xl leading-none text-emerald-400 hover:text-white">×</button>
+                </div>
+
+                <div class="flex justify-between text-xs font-medium text-emerald-400 mb-2">
+                    <div id="stepTitle" class="font-bold">STEP 1 OF 4 • CHOOSE CATEGORY</div>
+                    <div class="flex gap-1" id="progressDots"></div>
+                </div>
             </div>
 
-            <div class="flex-1 overflow-auto p-8" id="wizardContent"></div>
+            <div class="flex-1 overflow-auto p-8" id="wizardContent">
+                <!-- Filled by JavaScript -->
+            </div>
 
-            <div class="px-8 py-6 border-t border-emerald-500/30 flex items-center justify-between bg-[#0f172a]">
-                <button onclick="prevStep()" id="btnBack" class="px-8 py-4 text-lg font-medium border border-emerald-500/50 hover:border-emerald-500 rounded-2xl">BACK</button>
+            <!-- FOOTER -->
+            <div class="px-8 py-6 border-t border-emerald-500/30 flex items-center justify-between bg-[#1a1a1a]">
+                <button onclick="prevStep()" id="btnBack"
+                        class="px-8 py-4 text-lg font-medium border border-emerald-500/50 hover:border-emerald-500 rounded-2xl transition">BACK</button>
+
                 <div class="text-right">
                     <div class="text-sm text-emerald-400">ESTIMATED DEPOSIT</div>
                     <div id="liveTotal" class="text-4xl font-bold text-emerald-500">$0</div>
                 </div>
-                <button onclick="nextStep()" id="btnNext" class="px-10 py-4 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-lg rounded-2xl">NEXT</button>
+
+                <button onclick="nextStep()" id="btnNext"
+                        class="px-10 py-4 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold text-lg rounded-2xl transition">NEXT</button>
             </div>
         </div>
     </div>
 
     <script>
+        // Tailwind
         function initTailwind() {
             return { config(userConfig = {}) { return { content: [], theme: { extend: {} }, plugins: [], ...userConfig } } };
         }
@@ -79,6 +94,26 @@
 
         function updateLiveTotal() {
             document.getElementById('liveTotal').textContent = `$${calculateTotal()}`;
+        }
+
+        function updateProgress() {
+            const titleEl = document.getElementById('stepTitle');
+            const dotsContainer = document.getElementById('progressDots');
+            dotsContainer.innerHTML = '';
+
+            const titles = [
+                "STEP 1 OF 4 • CHOOSE CATEGORY",
+                "STEP 2 OF 4 • ADD-ONS & DETAILS",
+                "STEP 3 OF 4 • YOUR CONTACT INFO"
+            ];
+            titleEl.textContent = titles[currentStep - 1];
+
+            for (let i = 1; i <= 3; i++) {
+                const dot = document.createElement('div');
+                dot.className = `w-6 h-1.5 rounded-full cursor-pointer transition-all ${i === currentStep ? 'bg-emerald-500' : 'bg-white/30'}`;
+                dot.onclick = () => { currentStep = i; renderStep(); };
+                dotsContainer.appendChild(dot);
+            }
         }
 
         function renderStep() {
